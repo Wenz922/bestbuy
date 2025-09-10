@@ -12,7 +12,7 @@ class Product:
             raise ValueError("Invalid input, quantity must be greater than or equal to 0!")
         self.active = True
 
-    def get_quantity(self):
+    def get_quantity(self) -> int:
         """Return the quantity of the product."""
         return self.quantity
 
@@ -23,7 +23,7 @@ class Product:
         if quantity == 0:
             self.deactivate()
 
-    def is_active(self):
+    def is_active(self) -> bool:
         """Return True if the product is active."""
         return self.active
 
@@ -39,7 +39,7 @@ class Product:
         """Display the product information."""
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
 
-    def buy(self, quantity: int):
+    def buy(self, quantity: int) -> float:
         """Buy quantity of the product and return the total price."""
         if quantity <= 0:
             raise ValueError("Invalid input, quantity must be greater than 0!")
@@ -49,6 +49,6 @@ class Product:
             raise ValueError("Product is not available!")
         total_price = quantity * self.price
         self.set_quantity(self.quantity - quantity)
-        return float(total_price)
+        return total_price
 
 
