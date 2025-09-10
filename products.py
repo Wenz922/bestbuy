@@ -37,14 +37,14 @@ class Product:
 
     def show(self):
         """Display the product information."""
-        print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
     def buy(self, quantity: int) -> float:
         """Buy quantity of the product and return the total price."""
         if quantity <= 0:
             raise ValueError("Invalid input, quantity must be greater than 0!")
         if quantity > self.quantity:
-            raise ValueError("There are less than the product quantity!")
+            raise ValueError("Error while making order! Quantity larger than what exists.")
         if not self.active:
             raise ValueError("Product is not available!")
         total_price = quantity * self.price
