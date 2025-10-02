@@ -1,15 +1,15 @@
 class Product:
 
     def __init__(self, name: str, price: float, quantity: int):
-        self.name = name
         if not name:
             raise ValueError("Invalid input, name is required!")
-        self.price = price
         if price < 0:
             raise ValueError("Invalid input, price must be greater than or equal to 0!")
-        self.quantity = quantity
         if quantity < 0:
             raise ValueError("Invalid input, quantity must be greater than or equal to 0!")
+        self.name = name
+        self.price = price
+        self.quantity = quantity
         self.active = True
 
     def get_quantity(self) -> int:

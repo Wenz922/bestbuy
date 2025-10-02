@@ -29,6 +29,7 @@ def show_products():
 
 
 def main():
+    """Main function"""
     while True:
         # Display the menu
         start()
