@@ -21,10 +21,7 @@ class Store:
 
     def get_total_quantity(self) -> int:
         """Return total quantity of products in the store"""
-        total_product = 0
-        for product in self.product_list:
-            total_product += product.get_quantity()
-        return total_product
+        return sum(product.get_quantity() for product in self.product_list)
 
     def get_all_products(self) -> List[Product]:
         """Return all active products in the store"""
@@ -35,9 +32,14 @@ class Store:
         return active_products
 
     def order(self, shopping_list) -> float:
-        """Buy products with quantity and return the total price of the order
+        """Buy products with quantity and return the total price of the order.
+        If any product fails, the order is cancelled.
         shopping_list is a list of tuples (product, quantity)"""
         total_price = 0
         for product, quantity in shopping_list:
-            total_price += product.buy(quantity)
+            try:
+                total_price += product.buy(quantity)
+            except ValueError as e:
+                print(f"Order failed for {product.name}: {e}")
+                return 0  # cancel the order, return 0
         return total_price
