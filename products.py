@@ -52,3 +52,39 @@ class Product:
         return total_price
 
 
+# Non-stocked product
+class NonStockedProduct(Product):
+    def __init__(self, name: str, price: float):
+        super().__init__(name, price, quantity=0)
+
+    def set_quantity(self, quantity: int):
+        """Non-stocked products always have 0 quantity and stay this way."""
+        self.quantity = 0
+
+    def buy(self, quantity: int) -> float:
+        """Buy quantity of the product and return the total price, quantity doesn't change."""
+        if quantity <= 0:
+            raise ValueError("Quantity must be > 0!")
+        # no stock to reduce, just charge
+        return quantity * self.price
+
+    def show(self):
+        """Display the product information."""
+        return f"{self.name} (Non-stocked), Price: {self.price}"
+
+
+# Limited product
+class LimitedProduct(Product):
+    def __init__(self, name: str, price: float, quantity: int, maximum: int):
+        super().__init__(name, price, quantity)
+        self.maximum = maximum
+
+    def buy(self, quantity: int) -> float:
+        """Buy quantity of the product and return the total price, can't buy given maximum quantity."""
+        if quantity > self.maximum:
+            raise ValueError(f"Cannot buy more than {self.maximum} of {self.name} in one order!")
+        return super().buy(quantity)
+
+    def show(self):
+        """Display the product information."""
+        return f"{self.name} (Limited, max {self.maximum} per order), Price: {self.price}, Quantity: {self.quantity}"
