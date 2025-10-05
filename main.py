@@ -89,7 +89,10 @@ def main():
 
             if shopping_cart:
                 total_price = best_buy.order(shopping_cart)
-                print(f"Order made! Total payment: ${total_price}\n")
+                if total_price > 0:
+                    print(f"Order made! Total payment: ${total_price}\n")
+                else:
+                    print("No order was made.")
 
         if user_choice == "4":
             break
